@@ -1,0 +1,14 @@
+{
+  "name": "codewars",
+  "version": "1.0.0",
+  "description": "Code Wars Problems Repository",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha ./test/**/*$MATCH*.test.js"
+  },
+  "author": "Evan Greer",
+  "license": "ISC"
+}
