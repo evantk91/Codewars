@@ -3,10 +3,10 @@ const { tvRemoteSymbols } = require('../problems/tvRemoteSymbols');
 
 describe('TV Remote w Additional Symbols', () => {
     it("Mixed", function() {
-        assert.strictEqual(tvRemoteSymbols("Too Easy?"), 71);
+        assert.strictEqual(tvRemoteSymbols("..._^_--9__"), 44);
     });
 
-    it("Lower", function() {
+    xit("Lower", function() {
         assert.strictEqual(tvRemoteSymbols("does"), 16);
         assert.strictEqual(tvRemoteSymbols("your"), 21);
         assert.strictEqual(tvRemoteSymbols("solution"), 33);
@@ -16,7 +16,7 @@ describe('TV Remote w Additional Symbols', () => {
         assert.strictEqual(tvRemoteSymbols("words"), 23);
     });
 
-    it("Upper", function() {
+    xit("Upper", function() {
         assert.strictEqual(tvRemoteSymbols("DOES"), 19);
         assert.strictEqual(tvRemoteSymbols("YOUR"), 22);
         assert.strictEqual(tvRemoteSymbols("SOLUTION"), 34);
@@ -26,7 +26,7 @@ describe('TV Remote w Additional Symbols', () => {
         assert.strictEqual(tvRemoteSymbols("WORDS"), 24);
     });
 
-    it("symbols", function() {
+    xit("symbols", function() {
         assert.strictEqual(tvRemoteSymbols("^does^"), 33);
         assert.strictEqual(tvRemoteSymbols("$your$"), 53);
         assert.strictEqual(tvRemoteSymbols("#solution#"), 49);

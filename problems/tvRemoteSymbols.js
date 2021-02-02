@@ -15,12 +15,14 @@ function tvRemoteSymbols(word) {
       output = output + pressesBetweenChars(start, 'mode') + pressesBetweenChars('mode', char.toLowerCase()) + 2;
       mode = 'upper';
    //if first character is an additional symbol   
-   } else if(isAdditionalSymbol(char)) {
+   } else if(isMode3Symbol(char)) {
       output = output + pressesBetweenChars(start, 'mode') + pressesBetweenChars('mode', char) + 3;  
       mode = 'symbol';
    } else {
       output = output + pressesBetweenChars(start, char) + 1; 
    };
+
+   console.log(output);
 
    //loop through remaining characters
    for(let i = 1; i < word.length; i++) {
@@ -28,8 +30,22 @@ function tvRemoteSymbols(word) {
       let prevChar = word[i-1];
 
       //if character is a mode 1 symbol or number
-      if(isNumberOrSymbol(char)) {
+      if(isSymbol(char)) {
          output = output + pressesBetweenChars(prevChar.toLowerCase(), char) + 1;
+         console.log(output);
+         continue;
+      };
+
+      if(isNumber(char)) {
+         if(mode === 'symbol') {
+            output = output + pressesBetweenChars(prevChar.toLowerCase(), 'mode') + 1;
+            mode = 'lower';
+            output = output + pressesBetweenChars('mode', char.toLowerCase()) + 1;
+            console.log(output);
+         } else {
+            output = output + pressesBetweenChars(prevChar.toLowerCase(), char) + 1;
+            console.log(output);
+         }
          continue;
       }
 
@@ -45,7 +61,7 @@ function tvRemoteSymbols(word) {
             mode = 'upper';
             output = output + pressesBetweenChars('mode', char.toLowerCase()) + 1;
          }
-      } else if(isAdditionalSymbol(char)) {
+      } else if(isMode3Symbol(char)) {
          if(mode === 'upper') {
             output = output + pressesBetweenChars(prevChar.toLowerCase(), 'mode') + 1;
             mode = 'symbol';
@@ -70,6 +86,8 @@ function tvRemoteSymbols(word) {
             output = output + pressesBetweenChars(prevChar.toLowerCase(), char) + 1;
          };
       };
+
+      console.log(output);
    };
     
    return output;
@@ -83,19 +101,21 @@ function isCapitalized(char) {
    return capLetters.includes(char);
 };
 
-function isNumberOrSymbol(char) {
-   const numberSymbol = ['0', '1', '2', '3', '4', '5', '6', '7', 
-   '8', '9', '.', '@', '_', '/', ' '];
-
-   return numberSymbol.includes(char);
+function isNumber(char) {
+   const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+   return numbers.includes(char);
 };
 
-function isAdditionalSymbol(char) {
-   const symbol = ['^', '~', '?', '!', "'", '"', '(', ')', '-', ':', ';', '+', '&', '%', '*', '=', 
+function isSymbol(char) {
+   const symbols = ['.', '@', '_', '/', ' '];
+   return symbols.includes(char);
+}
+
+function isMode3Symbol(char) {
+   const symbols = ['^', '~', '?', '!', "'", '"', '(', ')', '-', ':', ';', '+', '&', '%', '*', '=', 
    '<', '>', '\u20ac', '\u00a3', '$', '\u00a5', '\u00a4', '\\', '[', ']', '{', '}', ',', '\u00a7', '#',
    '\u00bf', '\u00a1'];
-
-   return symbol.includes(char);
+   return symbols.includes(char);
 };
 
 function pressesBetweenChars(char1, char2) {
